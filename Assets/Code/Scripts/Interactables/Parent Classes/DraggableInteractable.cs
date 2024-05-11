@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -37,6 +38,8 @@ public class DraggableInteractable : MonoBehaviour, IInteractable {
     public void Unselect() {
         // The end of the drag state
         // Warp this object back to its original position and rotation
+        transform.DOKill();
+        
         this._rBody.velocity = Vector3.zero;
         transform.position = this._startPosition;
         transform.rotation = this._startRotation;

@@ -44,7 +44,7 @@ Material:
     - _WobbleZ: 0
     m_Colors:
     - _Fill_Liquid: {r: 0.111320674, g: 0.48579538, b: 1, a: 0}
-    - _Surface_Liquid: {r: 0.62352943, g: 0.8854496, b: 1, a: 1}
+    - _Surface_Liquid: {r: 0.17924517, g: 0.93916327, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3002983793010865811
 MonoBehaviour:

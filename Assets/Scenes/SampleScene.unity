@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 600318682}
   - component: {fileID: 600318681}
   - component: {fileID: 600318684}
+  - component: {fileID: 600318685}
   m_Layer: 6
   m_Name: Draggable
   m_TagString: Untagged
@@ -486,6 +487,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.86720735, y: 1.7244909, z: 1.2105567}
   m_Center: {x: 0.23075905, y: 0.01563561, z: -0.85680187}
+--- !u!114 &600318685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600318680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d892c6019f4a6f64482537d0c616defb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationIntensity: 1.5
+  _timeToRotate: 0.3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
