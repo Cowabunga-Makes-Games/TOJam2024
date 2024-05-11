@@ -44,10 +44,16 @@ public class DraggableInteractable : MonoBehaviour, IInteractable {
 
     public void Use() {
         // Trigger some effect when this interactable is interacted with
+        
+        // TODO: Make this a parent class, using it to populate various types of draggable interactables that can be
+        // used in different ways. (bottles to pour liquids, spice shakers, etc.)
+        print("Using draggable interactable");
     }
 
     public void CancelUse() {
         // Cancel the effect when this interactable is interacted with
+        
+        print("Cancel the draggable interactable use");
     }
 
     #endregion

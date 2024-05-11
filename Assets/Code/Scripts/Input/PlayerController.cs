@@ -29,22 +29,28 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnEnable() {
+        this._playerInputActions.Player.Select.performed += this.SelectInteractable;
+        this._playerInputActions.Player.Select.canceled += this.UnselectInteractable;
+        
+        this._playerInputActions.Player.Use.performed += this.UseInteractable;
+        this._playerInputActions.Player.Use.canceled += this.CancelUseInteractable;
+        
         this._playerInputActions.Player.Enable();
-
-        this._playerInputActions.Player.Select.performed += this.Select;
-        this._playerInputActions.Player.Select.canceled += this.Unselect;
     }
 
     private void OnDisable() {
+        this._playerInputActions.Player.Select.performed -= this.SelectInteractable;
+        this._playerInputActions.Player.Select.canceled -= this.UnselectInteractable;
+        
+        this._playerInputActions.Player.Use.performed -= this.UseInteractable;
+        this._playerInputActions.Player.Use.canceled -= this.CancelUseInteractable;
+        
         this._playerInputActions.Player.Disable();
-
-        this._playerInputActions.Player.Select.performed -= this.Select;
-        this._playerInputActions.Player.Select.canceled -= this.Unselect;
     }
     
     #endregion
     
-    private void Select(InputAction.CallbackContext obj) {
+    private void SelectInteractable(InputAction.CallbackContext obj) {
         if (!Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.ReadValue()), out RaycastHit hit) ||
             !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)) return;
         
@@ -63,11 +69,19 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(this.OnInteractableDrag(objToDrag));
     }
     
-    private void Unselect(InputAction.CallbackContext obj) {
+    private void UnselectInteractable(InputAction.CallbackContext obj) {
         this._isDraggingInteractable = false;
         
         this._currentInteractable.Unselect();
         this._currentInteractable = this._nullInteractable;
+    }
+
+    private void UseInteractable(InputAction.CallbackContext obj) {
+        this._currentInteractable.Use();
+    }
+    
+    private void CancelUseInteractable(InputAction.CallbackContext obj) {
+        this._currentInteractable.CancelUse();
     }
 
     private IEnumerator OnInteractableDrag(GameObject obj) {

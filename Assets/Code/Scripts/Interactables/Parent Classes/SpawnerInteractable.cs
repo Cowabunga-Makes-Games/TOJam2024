@@ -30,13 +30,9 @@ public class SpawnerInteractable : MonoBehaviour, IInteractable {
     
     public void Unselect() {}
 
-    public void Use() {
-        // Trigger some effect when this interactable is interacted with
-    }
-
-    public void CancelUse() {
-        // Cancel the effect when this interactable is interacted with
-    }
+    // A spawner interactable cannot be used. It can only fetch and spawn new objects to drag around.
+    public void Use() {}
+    public void CancelUse() {}
 
     #endregion
     
