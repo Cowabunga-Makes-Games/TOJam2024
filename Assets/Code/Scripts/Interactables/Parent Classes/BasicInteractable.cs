@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BasicInteractable : MonoBehaviour, IInteractable {
+
+    private Rigidbody _rBody;
 
     private Vector3 _startPosition;
     private Quaternion _startRotation;
@@ -10,6 +13,8 @@ public class BasicInteractable : MonoBehaviour, IInteractable {
     private void Awake() {
         this._startPosition = transform.position;
         this._startRotation = transform.rotation;
+
+        this._rBody = GetComponent<Rigidbody>();
     }
     
     //========================================
@@ -30,6 +35,7 @@ public class BasicInteractable : MonoBehaviour, IInteractable {
     public void Unselect() {
         // The end of the drag state
         // Warp this object back to its original position and rotation
+        this._rBody.velocity = Vector3.zero;
         transform.position = this._startPosition;
         transform.rotation = this._startRotation;
     }

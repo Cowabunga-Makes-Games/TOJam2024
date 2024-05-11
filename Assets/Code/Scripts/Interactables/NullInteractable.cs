@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Null Object for an interactable type.
 /// </summary>
-public class NullInteractable : MonoBehaviour, IInteractable {
+public class NullInteractable : IInteractable {
     
     //========================================
     // Public Methods
