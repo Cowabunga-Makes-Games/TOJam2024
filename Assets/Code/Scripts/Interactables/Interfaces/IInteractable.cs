@@ -12,7 +12,7 @@ public interface IInteractable {
 
     public void OnHover();
     
-    public void Select();
+    public IInteractable Select(Vector3 mousePos, out GameObject objToDrag);
     public void Unselect();
     
     public void Use();

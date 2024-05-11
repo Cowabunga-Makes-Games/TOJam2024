@@ -49,8 +49,18 @@ public class PlayerController : MonoBehaviour {
             !hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)) return;
         
         this._isDraggingInteractable = true;
-        this._currentInteractable = interactable;
-        StartCoroutine(this.OnInteractableDrag(hit.collider.gameObject, interactable));
+        
+        // Delegate the decision of which gameObject to manipulate with the click-and-drag mechanic to the clicked interactable.
+        // This is crucial when considering cases where the object you select may spawn an entity to be dragged
+        this._currentInteractable = interactable.Select(hit.point, out var objToDrag);
+
+        if (objToDrag is null) {
+            Debug.LogWarning("The selected interactable does not have an associated GameObject! " +
+                             "Please reconsider its interactable component type.");
+            return;
+        }
+        
+        StartCoroutine(this.OnInteractableDrag(objToDrag));
     }
     
     private void Unselect(InputAction.CallbackContext obj) {
@@ -60,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         this._currentInteractable = this._nullInteractable;
     }
 
-    private IEnumerator OnInteractableDrag(GameObject obj, IInteractable interactable) {
+    private IEnumerator OnInteractableDrag(GameObject obj) {
         if (!obj.TryGetComponent<Rigidbody>(out var rb)) {
             Debug.LogError("Attempting to move an interactable without a rigidbody. Please add a rigidbody component: " + obj);
         }

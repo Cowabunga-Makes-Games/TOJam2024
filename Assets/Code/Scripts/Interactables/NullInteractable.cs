@@ -12,8 +12,11 @@ public class NullInteractable : IInteractable {
     #region Public Methods
 
     public void OnHover() {}
-    
-    public void Select() {}
+
+    public IInteractable Select(Vector3 mousePos, out GameObject obj) {
+        obj = null;
+        return this;
+    }
     public void Unselect() {}
     
     public void Use() {}

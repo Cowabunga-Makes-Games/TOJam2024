@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BasicInteractable : MonoBehaviour, IInteractable {
+public class DraggableInteractable : MonoBehaviour, IInteractable {
 
     private Rigidbody _rBody;
 
@@ -27,9 +27,11 @@ public class BasicInteractable : MonoBehaviour, IInteractable {
         // Trigger some special animation, SFX, etc.
     }
 
-    public void Select() {
+    public IInteractable Select(Vector3 mousePos, out GameObject objToDrag) {
         // Trigger some special animation, SFX, etc.
         // Note that this is the beginning of the dragging state
+        objToDrag = gameObject;
+        return this;
     }
     
     public void Unselect() {
