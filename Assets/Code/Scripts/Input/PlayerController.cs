@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour {
     private int _maxTilt = 180;
     private int _defaultTilt = 0;
     private GameObject objToDrag;
-    private Vector3 _rotation = Vector3.forward;
-    
-    [SerializeField] private float _speed = 0f;
     
     //========================================
     // Unity Methods
@@ -105,13 +102,6 @@ public class PlayerController : MonoBehaviour {
 
             rb.velocity = (mouseRay.GetPoint(vCameraToObject) - obj.transform.position) * interactableDragSpeed; 
             
-            //Detect if the middle mouse button is pressed
-            if (Input.GetKey(KeyCode.Mouse2))
-            {
-                Debug.Log("Mouse 2 ");
-                objToDrag.transform.Rotate(_rotation * _speed);
-                
-            }
             yield return this._dragPhysicsUpdate;
         }
     }

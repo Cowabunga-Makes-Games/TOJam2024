@@ -137,13 +137,14 @@ GameObject:
   - component: {fileID: 312141687}
   - component: {fileID: 312141691}
   - component: {fileID: 312141692}
+  - component: {fileID: 312141693}
   m_Layer: 6
   m_Name: Draggable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &312141687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -242,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d879b780ff0dab141ab31e5364c12840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tiltIntensity: 100
+  _timeToPour: 0.5
 --- !u!54 &312141692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -269,6 +272,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &312141693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312141686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d892c6019f4a6f64482537d0c616defb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationIntensity: 1
+  _timeToRotate: 0.5
 --- !u!1 &447120587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1146,14 @@ PrefabInstance:
     - target: {fileID: 4402414623469947370, guid: 04cd8e7ead89706499466dbfec2d2de7, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696191853285120480, guid: 04cd8e7ead89706499466dbfec2d2de7, type: 3}
+      propertyPath: _timeToPour
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696191853285120480, guid: 04cd8e7ead89706499466dbfec2d2de7, type: 3}
+      propertyPath: _tiltIntensity
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6048313931142567293, guid: 04cd8e7ead89706499466dbfec2d2de7, type: 3}
       propertyPath: m_Enabled
