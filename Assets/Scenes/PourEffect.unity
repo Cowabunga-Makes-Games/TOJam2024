@@ -1094,6 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
   interactableDragSpeed: 10
+  _speed: 100
 --- !u!4 &1748486280
 Transform:
   m_ObjectHideFlags: 0
