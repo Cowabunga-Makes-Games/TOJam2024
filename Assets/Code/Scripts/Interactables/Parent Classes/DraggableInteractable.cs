@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(DragRotation))]
 public class DraggableInteractable : MonoBehaviour, IInteractable {
 
     private Rigidbody _rBody;
@@ -11,11 +11,17 @@ public class DraggableInteractable : MonoBehaviour, IInteractable {
     private Vector3 _startPosition;
     private Quaternion _startRotation;
 
+    private DragRotation _dragRotation;
+    
+    [SerializeField] private float _tiltIntensity = 100f;
+    [SerializeField] private float _timeToPour = 0.5f;
+
     private void Awake() {
         this._startPosition = transform.position;
         this._startRotation = transform.rotation;
 
         this._rBody = GetComponent<Rigidbody>();
+        this._dragRotation = GetComponent<DragRotation>();
     }
     
     //========================================
@@ -50,13 +56,17 @@ public class DraggableInteractable : MonoBehaviour, IInteractable {
         
         // TODO: Make this a parent class, using it to populate various types of draggable interactables that can be
         // used in different ways. (bottles to pour liquids, spice shakers, etc.)
-        print("Using draggable interactable");
+        
+        this._dragRotation.enabled = false;
+        transform.DORotate(Vector3.forward * this._tiltIntensity, this._timeToPour, RotateMode.Fast);
     }
 
     public void CancelUse() {
         // Cancel the effect when this interactable is interacted with
-        
-        print("Cancel the draggable interactable use");
+
+        this._dragRotation.enabled = true;
+        transform.DOKill();
+        transform.DORotate(Vector3.zero, this._timeToPour, RotateMode.Fast);
     }
 
     #endregion
