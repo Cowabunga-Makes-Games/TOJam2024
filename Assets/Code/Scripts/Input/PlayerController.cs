@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour {
     public float interactableDragSpeed;
     private WaitForFixedUpdate _dragPhysicsUpdate;
     private bool _isDraggingInteractable;
+    private int _maxTilt = 180;
+    private int _defaultTilt = 0;
+    private GameObject objToDrag;
+    private Vector3 _rotation = Vector3.forward;
+    
+    [SerializeField] private float _speed = 0f;
     
     //========================================
     // Unity Methods
@@ -58,7 +64,7 @@ public class PlayerController : MonoBehaviour {
         
         // Delegate the decision of which gameObject to manipulate with the click-and-drag mechanic to the clicked interactable.
         // This is crucial when considering cases where the object you select may spawn an entity to be dragged
-        this._currentInteractable = interactable.Select(hit.point, out var objToDrag);
+        this._currentInteractable = interactable.Select(hit.point, out objToDrag);
 
         if (objToDrag is null) {
             Debug.LogWarning("The selected interactable does not have an associated GameObject! " +
@@ -98,6 +104,14 @@ public class PlayerController : MonoBehaviour {
             var mouseRay = this._camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             rb.velocity = (mouseRay.GetPoint(vCameraToObject) - obj.transform.position) * interactableDragSpeed; 
+            
+            //Detect if the middle mouse button is pressed
+            if (Input.GetKey(KeyCode.Mouse2))
+            {
+                Debug.Log("Mouse 2 ");
+                objToDrag.transform.Rotate(_rotation * _speed);
+                
+            }
             yield return this._dragPhysicsUpdate;
         }
     }
